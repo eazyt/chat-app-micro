@@ -3,15 +3,22 @@ import loginImage from '../../assets/images/login.svg'
 import { Link } from 'react-router-dom'
 import './Auth.scss'
 // import axios from 'axios'
-import AuthService from '../../services/authService'
+// import AuthService from '../../services/authService';
+import { login } from '../../store/actions/auth'
+import { useDispatch } from 'react-redux'
 
-const Login = () => { 
+const Login = ({ history}) => { 
+  const dispatch = useDispatch()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const submitForm = (e) => { 
     e.preventDefault()
-    console.log({ email, password })
-    AuthService.login({ email, password }).then(res => { console.log(res)})
+    dispatch(login({
+      email,
+      password
+    }, history))
+    // console.log({ email, password })
+    // AuthService.login({ email, password }).then(res => { console.log(res)})
     // axios.post('http://127.0.0.1:3000/login', {email, password})
     //   .then((res) => { 
     //     console.log(res)
